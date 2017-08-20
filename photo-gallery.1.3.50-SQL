@@ -3,12 +3,20 @@
 ## Description:
 Gallery is a fully responsive WordPress gallery plugin with advanced functionality. 
 Create 100% responsive FREE WordPress photo gallery in minutes. Easy to customize and various views.
-
 There is a SQL injection vulnerability due to insufficient checking about input data.
-
 
 ## Details
 Details will be published after the release of vendor.
 
 ## Credit
 ADLab of VenusTech
+
+## Details(Public)
+The vendor released a update to fix this issue. Here is the details:
+
+/photo-gallery/photo-gallery.php，line 141 will call function bwg_edit_tag. 
+bwg_edit_tag() is located in photo-gallery/photo-gallery.php, there is a function named edit_tag().
+edit_tag() is located in photo-gallery/admin/controllers/BWGControllerTags_bwg.php, $_REQUEST[‘tag_id’] is passed to build a SQL directly, 
+so this will cause a int-type sql-injection vulnerability. 
+
+Additional: function bwg_edit_tag() has a checking about user permission, so administrator permission is required to trigger this vulnerability.
